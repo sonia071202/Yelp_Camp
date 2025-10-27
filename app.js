@@ -35,7 +35,8 @@ const reviewRoutes = require('./routes/reviews');
 const MongoDBStore = require("connect-mongo")(session);
 
 
-const dbUrl = 'mongodb://127.0.0.1:27017/yelp-camp-maptiler';
+const dbUrl = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/yelp-camp-maptiler';
+
 mongoose.connect(dbUrl)
     .then(() => console.log("Database connected"))
     .catch(err => console.error("connection error:", err));
@@ -201,7 +202,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err })
 })
 
-// const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 app.listen(3000, () => {
     console.log(`Serving on port ${3000}`)
 })
