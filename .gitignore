@@ -1,0 +1,12 @@
+# Node.js dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# Logs and system files
+*.log
+.DS_Store
+
+# Optional: remove compiled uploads
+public/uploads/

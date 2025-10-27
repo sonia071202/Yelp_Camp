@@ -1,0 +1,87 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="row">
+  <h1 class="text-center">New Campground</h1>
+  <div class="col-md-6 offset-md-3">
+    <form action="/campgrounds" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
+      <!-- Title -->
+      <div class="mb-3">
+        <label class="form-label" for="title">Title</label>
+        <input class="form-control" type="text" id="title" name="campground[title]" required>
+        <div class="invalid-feedback">Please enter a title.</div>
+      </div>
+
+      <!-- Location -->
+      <div class="mb-3">
+        <label class="form-label" for="location">Location</label>
+        <input class="form-control" type="text" id="location" name="campground[location]" required>
+        <div class="invalid-feedback">Please enter a location.</div>
+      </div>
+
+      <!-- Price -->
+      <div class="mb-3">
+        <label class="form-label" for="price">Campground Price</label>
+        <div class="input-group">
+          <span class="input-group-text" id="price-label">$</span>
+          <input type="number" min="0" class="form-control" id="price" placeholder="0.00"
+                 aria-label="price" aria-describedby="price-label"
+                 name="campground[price]" required>
+        </div>
+        <div class="invalid-feedback">Please enter a valid price.</div>
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label class="form-label" for="description">Description</label>
+        <textarea class="form-control" id="description" name="campground[description]" rows="3" required></textarea>
+        <div class="invalid-feedback">Please add a description.</div>
+      </div>
+
+      <!-- Image Upload -->
+      <div class="mb-3">
+        <label class="form-label" for="image">Upload Image(s)</label>
+        <input type="file" class="form-control" id="image" name="image" multiple accept="image/*" required>
+        <div id="file-name" class="mt-2 text-muted"></div>
+        <div class="invalid-feedback">Please select at least one image.</div>
+      </div>
+
+      <!-- Submit -->
+      <div class="mb-3">
+        <button class="btn btn-success">Add Campground</button>
+      </div>
+    </form>
+    <a href="/campgrounds">← All Campgrounds</a>
+  </div>
+</div>
+
+<!-- ✅ Scripts for validation & file name display -->
+<script>
+  // Bootstrap-like form validation
+  (function () {
+    'use strict'
+    const forms = document.querySelectorAll('.validated-form')
+
+    Array.from(forms).forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+  })()
+
+  // Show selected file names
+  const imageInput = document.getElementById('image');
+  const fileNameDisplay = document.getElementById('file-name');
+
+  imageInput.addEventListener('change', function () {
+    if (this.files && this.files.length > 0) {
+      const names = Array.from(this.files).map(file => file.name).join(', ');
+      fileNameDisplay.textContent = `Selected: ${names}`;
+    } else {
+      fileNameDisplay.textContent = '';
+    }
+  });
+</script>
