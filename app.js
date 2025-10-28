@@ -35,7 +35,8 @@ const reviewRoutes = require('./routes/reviews');
 const MongoDBStore = require("connect-mongo")(session);
 
 
-const dbUrl = process.env.DB_URL || 'mongodb+srv://sg2023soniagupta_db_user:PC8BWaydVixFyoTU@<yourNewCluster>.mongodb.net/yelp-camp';
+const dbUrl = process.env.DB_URL || 'mongodb+srv://sg2023soniagupta_db_user:PC8BWaydVixFyoTU@cluster0.ctubuex.mongodb.net/yelp-camp?retryWrites=true&w=majority&appName=Cluster0';
+
 
 
 
